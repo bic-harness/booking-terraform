@@ -27,52 +27,11 @@ resource "random_string" "this" {
   number = false
 }
 
-resource "harness_platform_service" "this" {
-  org_id       = data.harness_platform_organization.this.id
-  project_id   = data.harness_platform_project.this.id
-  name         = var.name
-  identifier   = "${var.name}_${random_string.this.result}"
+resource "harness_platform_connector_kubernetes" "this" {
+  identifier  = "${var.name}_${random_string.this.result}"
+  name        = var.name
 
-  yaml         = <<-EOT
-service:
-  name: ${var.name}
-  identifier: ${var.name}_${random_string.this.result}
-  tags: {}
-  serviceDefinition:
-    spec:
-      manifests:
-        - manifest:
-            identifier: ${var.name}_svc_${random_string.this.result}
-            type: K8sManifest
-            spec:
-              store:
-                type: Github
-                spec:
-                  connectorRef: account.BCGitAccount
-                  gitFetchType: Branch
-                  paths:
-                    - harness-manifests
-                  repoName: ${var.repo_name}
-                  branch: ${var.branch}
-              valuesPaths:
-                - harness-manifests/values.yaml
-              skipResourceVersioning: true
-              enableDeclarativeRollback: false
-      artifacts:
-        primary:
-          primaryArtifactRef: <+input>
-          sources:
-            - spec:
-                connectorRef: account.harnessImage
-                imagePath: ${var.image}
-                tag: <+input>
-              identifier: ${var.name}_docker_${random_string.this.result}
-              type: DockerRegistry
-      variables:
-        - name: myRepoPath
-          type: String
-          description: "Full Repository Path"
-          value: https://github.com/bic-harness/${var.repo_name}
-    type: Kubernetes
-EOT
+  inherit_from_delegate {
+    delegate_selectors = ["${var.team_name}-harness-delegate"]
+  }
 }

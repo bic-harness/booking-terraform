@@ -1,5 +1,5 @@
 ---
 DQS:
-  type: nonprod
+  type: PreProduction
 Prod:
-  type: prod
+  type: Production
