@@ -32,6 +32,7 @@ resource "harness_platform_environment" "this" {
   project_id   = data.harness_platform_project.this.id
   name         = var.name
   identifier   = "${var.name}_${random_string.this.result}"
+  type         = var.type
 
   yaml         = <<-EOT
 environment:

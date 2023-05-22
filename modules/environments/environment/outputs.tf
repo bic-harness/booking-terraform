@@ -1,3 +1,3 @@
 output "id" {
-   value = harness_platform_service.this.id
+   value = harness_platform_environment.this.id
 }
