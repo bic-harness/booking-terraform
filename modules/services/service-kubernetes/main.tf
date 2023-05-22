@@ -36,13 +36,13 @@ resource "harness_platform_service" "this" {
   yaml         = <<-EOT
 service:
 name: ${var.name}
-identifier: K8s_Service
+identifier: ${var.name}_${random_string.this.result}
 tags: {}
 serviceDefinition:
   spec:
     manifests:
       - manifest:
-          identifier: ${var.name}_${random_string.this.result}"
+          identifier: ${var.name}_svc_${random_string.this.result}
           type: K8sManifest
           spec:
             store:
