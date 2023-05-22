@@ -1,0 +1,115 @@
+app_config:
+  artifactorybaseurl: artifactory.ual.com/dockerlocal/airportplatform
+
+services:
+  
+  backend:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev: 
+        type: docker_registry
+        image: library/nginx
+    manifest:
+      branch: foo
+
+
+  frontend:
+    type: kubernetes
+    tier: frontend
+    artifacts:
+      dev: 
+        type: docker_registry
+        image: library/nginx
+
+
+# Common artifact configuration
+artifacts:
+  docker_registry:
+    server: docker-hub-public
+    auto_trigger: true
+    trigger: 
+      type: workflow
+      name: eks-rolling-basic
+      env: 
+        name: dev
+        infra: us-east-2-aap-atw-devdrtgw
+
+# Common manifest configuration
+manifests:
+  kubernetes:
+    connector: micah-demo
+    path: charts/foo  
+    branch: master
+    overrides:
+      type: inline
+      values: |
+        image:
+          url: "${app.defaults.artifactorybaseurl}/${env.name}/${service.name}:${artifact.metadata.tag}"
+
+provisioners:
+  singlestack: 
+    type: cloudformation
+    branch: master
+    connector: auto-git-connector
+    path: infra-stack/ecs-appci-role.yml
+    variables:
+      APPContainerPort: TEXT
+      APPNAME: TEXT
+      AlbName: TEXT
+      ApplicationCI: TEXT
+      ApplicationContactDL: TEXT
+      CertificateArn: TEXT
+      ClusterAppCI: TEXT
+      DataClassification: TEXT
+      DataRetentionPeriod: TEXT
+      ECSClusterName: TEXT
+      Environment: TEXT
+      GSLBURL: TEXT
+      HealthCheckPath: TEXT
+      HostedZoneId: TEXT
+      HostedZoneName: TEXT
+      InternalExternal: TEXT
+      LoadBalancerPort: TEXT
+      LoadBalancerPriority: TEXT
+      MaintenanceWindow: TEXT
+      MaxContainers: TEXT
+      MinContainers: TEXT
+      NewAlb: TEXT
+      NewCluster: TEXT
+      RecordName: TEXT
+      RegulatoryControls: TEXT
+      RiskDataClass: TEXT
+      SLALevel: TEXT
+      Subnets: TEXT
+      UpperCaseClusterAppCI: TEXT
+      VPC: TEXT
+
+# Infrastructure definitions
+infrastructure:
+  us-east-2-aap-atw-devdrtgw:
+    type: kubernetes
+    environment: dev
+    provider: us-east-2-aap-atw-devdrtgw
+    namespace: ${serviceVariable.namespace}
+
+workflows:
+  eks-rolling-basic: {}
+
+# Cloud providers
+providers:
+  us-east-2-aap-atw-devdrtgw:
+    type: kubernetes
+    environment: dev
+    master_url: https://replaceme.com
+
+environments:
+  dev:
+    type: nonprod
+
+  qa:
+    type: nonprod
+  stg:
+    type: prod
+  prod:
+    type: prod

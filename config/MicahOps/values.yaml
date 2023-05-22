@@ -1,0 +1,34 @@
+technology_area: MicahOps
+# technology_area: MicahOps
+
+# docker_artifactory_base_url: artifactory.ual.com/dockerlocal/airportplatform
+
+# # Default workflows to give to all AppCI's in the technology area
+# workflows: 
+#   - eks-rolling-basic:
+
+# # Sets defaults for all artifacts in the specific technology area
+# artifacts:
+#   docker_registry:
+#     server: docker-hub-public
+
+
+
+# # Sets the default environments for all AppCI's in the technology area
+# environments:
+#   dev:
+#     type: nonprod
+#   qa:
+#     type: nonprod
+#   stg:
+#     type: prod
+#   prod:
+#     type: prod
+
+# provisioners:
+#   pipeline-generator:
+#     type: terraform
+#     connector: micah-demo
+#     path: modules/dynamic-pipeline
+#     skip_refresh: false
+#     branch: main

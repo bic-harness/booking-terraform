@@ -1,0 +1,62 @@
+services: 
+
+  helloworld:
+    type: ecs
+    description: cvz-2
+    artifacts:
+      dev: 
+        type: docker_artifactory
+        image: ebs/eservicecheckin/flightmanifest
+
+    # Example of adding an additional variable in addition to the defaults defined in values.yaml
+    # variables:
+    #   CPU: 
+    #     type: text
+    #     value: 2
+
+
+environments:
+  dev:
+    type: nonprod
+  qa:
+    type: nonprod
+
+
+# Infrastructure definitions
+infrastructure:
+  dev:
+    type: ecs
+    dynamic: true
+    environment: dev
+    provider: dev
+    assign_public_ip: false
+    role: Harness-${env.name}-us-east-1-Role
+    launch_type: fargate
+    region: ${workflow.variables.Region}
+    security_group_ids: ${cloudformation.ContainerSecurityGroup}
+    subnet_ids: ${environmentVariable.Subnets_useast2}
+    vpc: ${environmentVariable.VPC_useast2}
+    provisioner: singlestack
+  qa:
+    type: ecs
+    dynamic: true
+    environment: qa
+    provider: qa
+    assign_public_ip: false
+    role: Harness-${env.name}-us-east-1-Role
+    launch_type: fargate
+    region: ${workflow.variables.Region}
+    security_group_ids: ${cloudformation.ContainerSecurityGroup}
+    subnet_ids: ${environmentVariable.Subnets_useast2}
+    vpc: ${environmentVariable.VPC_useast2}
+    provisioner: singlestack
+
+providers:
+  dev:
+    type: aws
+    environment: dev
+    sts_role: arn:aws:iam::560380317052:role/HarnessCDDelegateRole
+  qa:
+    type: aws
+    environment: qa
+    sts_role: arn:aws:iam::881119752654:role/HarnessCDDelegateRole

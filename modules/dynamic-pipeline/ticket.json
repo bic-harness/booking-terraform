@@ -1,0 +1,210 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
+  "id": "10000",
+  "self": "https://micahlmartin.atlassian.net/rest/api/latest/issue/10000",
+  "key": "TES-1",
+  "fields": {
+    "statuscategorychangedate": "2022-05-19T09:31:12.367-0400",
+    "issuetype": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/issuetype/10001",
+      "id": "10001",
+      "description": "Functionality or a feature expressed as a user goal.",
+      "iconUrl": "https://micahlmartin.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+      "name": "Story",
+      "subtask": false,
+      "avatarId": 10315,
+      "hierarchyLevel": 0
+    },
+    "timespent": null,
+    "customfield_10030": [],
+    "project": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/project/10000",
+      "id": "10000",
+      "key": "TES",
+      "name": "testing",
+      "projectTypeKey": "software",
+      "simplified": false,
+      "avatarUrls": {
+        "48x48": "https://micahlmartin.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10405",
+        "24x24": "https://micahlmartin.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10405?size=small",
+        "16x16": "https://micahlmartin.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10405?size=xsmall",
+        "32x32": "https://micahlmartin.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10405?size=medium"
+      }
+    },
+    "customfield_10031": null,
+    "customfield_10032": null,
+    "fixVersions": [],
+    "customfield_10033": null,
+    "aggregatetimespent": null,
+    "customfield_10034": null,
+    "resolution": null,
+    "customfield_10029": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/customFieldOption/10020",
+      "value": "qa",
+      "id": "10020"
+    },
+    "resolutiondate": null,
+    "workratio": -1,
+    "issuerestriction": {
+      "issuerestrictions": {},
+      "shouldDisplay": false
+    },
+    "watches": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/issue/TES-1/watchers",
+      "watchCount": 1,
+      "isWatching": true
+    },
+    "lastViewed": "2022-05-19T11:31:10.990-0400",
+    "created": "2022-05-19T09:31:11.706-0400",
+    "customfield_10020": null,
+    "customfield_10021": null,
+    "customfield_10022": null,
+    "priority": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/priority/3",
+      "iconUrl": "https://micahlmartin.atlassian.net/images/icons/priorities/medium.svg",
+      "name": "Medium",
+      "id": "3"
+    },
+    "customfield_10023": null,
+    "customfield_10024": null,
+    "customfield_10025": null,
+    "customfield_10026": null,
+    "labels": [],
+    "customfield_10016": null,
+    "customfield_10017": null,
+    "customfield_10018": {
+      "hasEpicLinkFieldDependency": false,
+      "showField": false,
+      "nonEditableReason": {
+        "reason": "PLUGIN_LICENSE_ERROR",
+        "message": "The Parent Link is only available to Jira Premium users."
+      }
+    },
+    "customfield_10019": "0|hzzzzz:",
+    "aggregatetimeoriginalestimate": null,
+    "timeestimate": null,
+    "versions": [],
+    "issuelinks": [],
+    "assignee": null,
+    "updated": "2022-05-19T11:31:16.598-0400",
+    "status": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/status/10000",
+      "description": "",
+      "iconUrl": "https://micahlmartin.atlassian.net/",
+      "name": "Backlog",
+      "id": "10000",
+      "statusCategory": {
+        "self": "https://micahlmartin.atlassian.net/rest/api/2/statuscategory/2",
+        "id": 2,
+        "key": "new",
+        "colorName": "blue-gray",
+        "name": "To Do"
+      }
+    },
+    "components": [],
+    "timeoriginalestimate": null,
+    "description": "Some deployment ticket",
+    "customfield_10010": null,
+    "customfield_10014": null,
+    "timetracking": {},
+    "customfield_10015": null,
+    "customfield_10005": null,
+    "customfield_10006": null,
+    "security": null,
+    "customfield_10007": null,
+    "customfield_10008": null,
+    "attachment": [
+      {
+        "self": "https://micahlmartin.atlassian.net/rest/api/2/attachment/10000",
+        "id": "10000",
+        "filename": "bom.json",
+        "author": {
+          "self": "https://micahlmartin.atlassian.net/rest/api/2/user?accountId=557058%3Ac966e327-e9d4-4fc2-8534-7d8831131578",
+          "accountId": "557058:c966e327-e9d4-4fc2-8534-7d8831131578",
+          "emailAddress": "micahlmartin@gmail.com",
+          "avatarUrls": {
+            "48x48": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+            "24x24": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+            "16x16": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+            "32x32": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png"
+          },
+          "displayName": "Micah Martin",
+          "active": true,
+          "timeZone": "America/New_York",
+          "accountType": "atlassian"
+        },
+        "created": "2022-05-19T09:31:01.240-0400",
+        "size": 52,
+        "mimeType": "application/json",
+        "content": "https://micahlmartin.atlassian.net/rest/api/2/attachment/content/10000"
+      }
+    ],
+    "aggregatetimeestimate": null,
+    "customfield_10009": null,
+    "summary": "testing",
+    "creator": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/user?accountId=557058%3Ac966e327-e9d4-4fc2-8534-7d8831131578",
+      "accountId": "557058:c966e327-e9d4-4fc2-8534-7d8831131578",
+      "emailAddress": "micahlmartin@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "24x24": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "16x16": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "32x32": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png"
+      },
+      "displayName": "Micah Martin",
+      "active": true,
+      "timeZone": "America/New_York",
+      "accountType": "atlassian"
+    },
+    "subtasks": [],
+    "reporter": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/user?accountId=557058%3Ac966e327-e9d4-4fc2-8534-7d8831131578",
+      "accountId": "557058:c966e327-e9d4-4fc2-8534-7d8831131578",
+      "emailAddress": "micahlmartin@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "24x24": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "16x16": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png",
+        "32x32": "https://secure.gravatar.com/avatar/c23b963563e43954c912c41335411916?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMM-0.png"
+      },
+      "displayName": "Micah Martin",
+      "active": true,
+      "timeZone": "America/New_York",
+      "accountType": "atlassian"
+    },
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_10000": "{}",
+    "customfield_10001": null,
+    "customfield_10002": null,
+    "customfield_10003": null,
+    "customfield_10004": null,
+    "environment": null,
+    "duedate": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "comment": {
+      "comments": [],
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/issue/10000/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "votes": {
+      "self": "https://micahlmartin.atlassian.net/rest/api/2/issue/TES-1/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  }
+}

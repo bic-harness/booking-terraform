@@ -1,0 +1,158 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: CLOUD_FORMATION_CREATE_STACK
+      name: singlestack
+      properties:
+        addTags: true
+        awsConfigId: GOoviLqiStq0VZbhcdGWxw
+        backendConfigs: null
+        customStackName: Harness-${workflow.variables.ApplicationCI}-${workflow.variables.AppName}-Infra-ecs
+        provisionerName: singlestack
+        region: us-east-1
+        tags: |-
+          [{
+           "key":"ApplicationCI",
+           "value":"${workflow.variables.ApplicationCI}"
+          }]
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 900000
+        useCustomStackName: true
+        variables:
+        - name: RecordName
+          value: ${workflow.variables.AppName}-east1
+          valueType: TEXT
+        - name: ApplicationCI
+          value: ${workflow.variables.ApplicationCI}
+          valueType: TEXT
+        - name: RiskDataClass
+          value: Moderate
+          valueType: TEXT
+        - name: HealthCheckPath
+          value: /health
+          valueType: TEXT
+        - name: VPC
+          value: vpc-071b072d13508ae67
+          valueType: TEXT
+        - name: APPNAME
+          value: ${workflow.variables.AppName}
+          valueType: TEXT
+        - name: LoadBalancerPort
+          value: '443'
+          valueType: TEXT
+        - name: MaxContainers
+          value: '10'
+          valueType: TEXT
+        - name: NewAlb
+          value: ${workflow.variables.NewAlb}
+          valueType: TEXT
+        - name: LoadBalancerPriority
+          value: '5'
+          valueType: TEXT
+        - name: MinContainers
+          value: '2'
+          valueType: TEXT
+        - name: ApplicationContactDL
+          value: CPE-IT-TravelOps-Platform-DevOps@united.com
+          valueType: TEXT
+        - name: APPContainerPort
+          value: '8080'
+          valueType: TEXT
+        - name: HostedZoneName
+          value: ${workflow.variables.AppName}-east1.dev.${workflow.variables.ApplicationCI}.aws.ual.com
+          valueType: TEXT
+        - name: NewCluster
+          value: ${workflow.variables.NewCluster}
+          valueType: TEXT
+        - name: HostedZoneId
+          value: Z04113003HJY64R67X2ZL
+          valueType: TEXT
+        - name: GSLBURL
+          value: ${workflow.variables.AppName}.dev.${workflow.variables.ApplicationCI}.aws.ual.com
+          valueType: TEXT
+        - name: AlbName
+          value: ecsalb
+          valueType: TEXT
+        - name: DataRetentionPeriod
+          value: 6 months
+          valueType: TEXT
+        - name: UpperCaseClusterAppCI
+          value: ${app.defaults.AppCI.toUpperCase()}
+          valueType: TEXT
+        - name: Subnets
+          value: subnet-060eb67008ada7878,subnet-0908d96f54f0a857d,subnet-0f4422bb4184c54ae
+          valueType: TEXT
+        - name: ECSClusterName
+          value: ecs
+          valueType: TEXT
+        - name: SLALevel
+          value: Tier 1
+          valueType: TEXT
+        - name: Environment
+          value: dev
+          valueType: TEXT
+        - name: DataClassification
+          value: PII
+          valueType: TEXT
+        - name: ClusterAppCI
+          value: ${app.defaults.AppCI.toLowerCase()}
+          valueType: TEXT
+        - name: MaintenanceWindow
+          value: Sun:04:00-Sun:04:30
+          valueType: TEXT
+        - name: RegulatoryControls
+          value: GDPR
+          valueType: TEXT
+        - name: InternalExternal
+          value: Internal
+          valueType: TEXT
+        - name: CertificateArn
+          value: arn:aws:acm:us-east-1:560380317052:certificate/5774e32a-63d0-4572-a361-5256070c08c4
+          valueType: TEXT
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: true
+userVariables:
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: ApplicationCI
+  value: ${app.defaults.AppCI.toLowerCase()}
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: AppName
+  value: tcdecs
+- type: TEXT
+  allowedValues: true,false
+  fixed: false
+  mandatory: false
+  name: NewCluster
+- type: TEXT
+  allowedValues: true,false
+  fixed: false
+  mandatory: false
+  name: NewAlb

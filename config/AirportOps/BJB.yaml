@@ -1,0 +1,596 @@
+app_config:
+  artifactorybaseurl: artifactory.ual.com/dockerlocal/airportplatform
+
+# List of all the services for the AppCI
+services:
+
+  addflight-airports:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/addflight-airports
+
+  addflight-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/addflight-bff
+
+  addflight:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/addflight
+
+  appinfo-token:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/appinfo-token
+
+  baggage-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/baggage-bff
+
+  baggage-checkedbagcount:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/baggage-checkedbagcount
+
+  baggage-predictedbagcount:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/baggage-predictedbagcount
+
+  bjb-pcdrfeed:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/bjb-pcdrfeed
+
+  boardingstatus-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/boardingstatus-bff
+
+  devicemgmt-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/devicemgmt-bff
+
+  devicemgmt-deleteddevices:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/devicemgmt-deleteddevices
+
+  devicemgmt-getdevices:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/devicemgmt-getdevices
+
+  devicemgmt-upsertdevices:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/devicemgmt-upsertdevices
+
+  events-eventprocessor:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/events-eventprocessor
+
+  faamgmt-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/faamgmt-bff
+
+  faamgmt-boardingstatus:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-boardingstatus
+
+  faamgmt-checkaddedcrews:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-checkaddedcrews
+
+  faamgmt-crewimage:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-crewimage
+
+  faamgmt-crewturn:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/faamgmt-crewturn
+
+  faamgmt-employeeja:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-employeeja
+
+  faamgmt-upsertfaacrews:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-upsertfaacrews
+
+  faamgmt-upsertfaaflight:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/faamgmt-upsertfaaflight
+
+  flightmgmt-activeflightdevices:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/flightmgmt-activeflightdevices
+
+  flightmgmt-bookedpassengercounts:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/flightmgmt-bookedpassengercounts
+
+  flightmgmt-iwshost:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/flightmgmt-iwshost
+
+  flightsearch:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/flightsearch
+
+  initializeflight-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/initializeflight-bff
+
+  initializeflight-openclosesubscription:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/initializeflight-openclosesubscription
+
+  initializeflight-passengers:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/initializeflight-passengers
+
+  passengerreports-recreport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/passengerreports-recreport
+
+  passengerreports-unrecreport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/passengerreports-unrecreport
+
+  pausedmgmt-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/pausedmgmt-bff
+
+  pausedmgmt-upsertboardingpaused:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/pausedmgmt-upsertboardingpaused
+
+  pcdrfeedsqstodynamo:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/pcdrfeedsqstodynamo
+
+  reconmgmt-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-bff
+
+  reconmgmt-boardingpass:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-boardingpass
+
+  reconmgmt-deplaneallpaxbyflight:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-deplaneallpaxbyflight
+
+  reconmgmt-deplanepaxbyflight:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-deplanepaxbyflight
+
+  reconmgmt-haslapchild:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-haslapchild
+
+  reconmgmt-paxtotals:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-paxtotals
+
+  reconmgmt-prcstatus:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-prcstatus
+
+  reconmgmt-reconcileonepaxbybp:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-reconcileonepaxbybp
+
+  reconmgmt-reconcileonepaxbyseq:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/reconmgmt-reconcileonepaxbyseq
+
+  reports-baggagereport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/reports-baggagereport
+
+  reports-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/reports-bff
+
+  reports-bumreport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/reports-bumreport
+
+  reports-deletedtagsreport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/reports-deletedtagsreport
+
+  reports-norecreport:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/reports-norecreport
+
+  seatmgmt-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/seatmgmt-bff
+
+  seatmgmt-misconnects:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/seatmgmt-misconnects
+
+  seatmgmt-seatmap:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/seatmgmt-seatmap
+
+  seatmgmt-unseat:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/seatmgmt-unseat
+
+  sharescmd-bff:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/sharescmd-bff
+
+  sharescmd-commands:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/sharescmd-commands
+
+  tokens:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/tokens
+
+  util-eqa:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/dev/util-eqa
+
+  util-timestamps:
+    type: kubernetes
+    tier: backend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: airportplatform/bjb/dev/util-timestamps
+
+  ui:
+    type: kubernetes
+    tier: frontend
+    artifacts:
+      dev:
+        type: docker_artifactory
+        image: bjb/dev/bjb-ui
+
+
+# Common artifact configuration
+artifacts:
+  docker_artifactory:
+    server: artifactory.ual.com
+    repository: dockerlocal
+    connector: Jfrog-Artifactory
+    auto_trigger: true
+    trigger: 
+      type: workflow
+      name: eks-rolling-basic
+      env: 
+        name: dev
+        infra: us-east-1-aap-atw-devtgw
+
+# Common manifest config for all kubernetes services
+manifests:
+  kubernetes:
+    connector: GitHub-Account-UAL
+    repo: AirportOps.BJB.DevSecOps-BJB
+    path: SingleTemplate/template
+    branch: master
+    overrides:
+      type: inline
+      values: |
+        image:
+          url: "${app.defaults.artifactorybaseurl}/${env.name}/${service.name}:${artifact.metadata.tag}"
+
+# Workflows to configure
+workflows: 
+  eks-rolling-basic: {}
+
+# Environment configuration
+environments:
+  dev:
+    type: nonprod
+
+  qa:
+    type: nonprod
+
+  stg:
+    type: prod
+
+  prd:
+    type: prod
+
+# Infrastructure definitions
+infrastructure:
+  us-east-2-aap-atw-devdrtgw:
+    type: kubernetes
+    environment: dev
+    provider: us-east-2-aap-atw-devdrtgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-1-aap-atw-devtgw:
+    type: kubernetes
+    environment: dev
+    provider: us-east-1-aap-atw-devtgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-1-aap-atw-qatgw:
+    type: kubernetes
+    environment: qa
+    provider: us-east-1-aap-atw-qatgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-2-aap-atw-qadrtgw:
+    type: kubernetes
+    environment: qa
+    provider: us-east-2-aap-atw-qadrtgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-1-aap-test-qatgw:
+    type: kubernetes
+    environment: qa
+    provider: us-east-1-aap-test-qatgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-1-aap-primary-atw-prdtgw:
+    type: kubernetes
+    environment: prd
+    provider: us-east-1-aap-primary-atw-prdtgw
+    namespace: ${serviceVariable.namespace}
+
+  us-east-2-aap-atw-prddrtgw:
+    type: kubernetes
+    environment: prd
+    provider: us-east-2-aap-atw-prddrtgw
+    namespace: ${serviceVariable.namespace}
+
+# Cloud Providers 
+providers:
+  us-east-2-aap-atw-devdrtgw:
+    type: kubernetes
+    environment: dev
+    master_url: https://6898A959BEB29879EB78DB7881972045.gr7.us-east-2.eks.amazonaws.com
+
+  us-east-1-aap-atw-devtgw:
+    type: kubernetes
+    environment: dev
+    master_url: https://9FAD057048F1B52E0F1515669463C6B5.sk1.us-east-1.eks.amazonaws.com
+
+  us-east-1-aap-atw-qatgw:
+    type: kubernetes
+    environment: qa
+    master_url: us-east-1-aap-atw-qatgw
+
+  us-east-2-aap-atw-qadrtgw:
+    type: kubernetes
+    environment: qa
+    master_url: https://75D5257189704D9DB53F26D8EDEA5C71.gr7.us-east-2.eks.amazonaws.com
+  
+  us-east-1-aap-test-qatgw:
+    type: kubernetes
+    environment: qa
+    master_url: https://927E24D146B07A459A48818874DBF8F4.gr7.us-east-1.eks.amazonaws.com
+
+  us-east-1-aap-primary-atw-prdtgw:
+    type: kubernetes
+    environment: prd
+    master_url: https://9B7224F9AE2DB4905F6724A784A99E7C.sk1.us-east-1.eks.amazonaws.com
+  
+  us-east-2-aap-atw-prddrtgw:
+    type: kubernetes
+    environment: prd
+    master_url: https://297A5825D0F8DC3B623A83BCFA07AA1D.sk1.us-east-2.eks.amazonaws.com

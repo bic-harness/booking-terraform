@@ -1,0 +1,19 @@
+variable "technology_area" {
+  description = "The UAL Technology Area."
+}
+
+variable "app_ci" {
+  description = "The UAL AppCI."
+}
+
+variable "service_name" {
+  description = "The service name."
+}
+
+variable "name" {
+  description = "The name of the service."
+}
+
+variable "config_path" {
+  description = "The path to the config file."
+}

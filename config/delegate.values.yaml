@@ -1,0 +1,10 @@
+replicaCount: <+pipeline.variables.replicas>
+
+accountId: <+pipeline.variables.account_id>
+delegateToken: <+pipeline.variables.delegate_token>
+delegateProfile: <+pipeline.variables.delegate_profile>
+
+fullnameOverride: <+pipeline.variables.technology_area.toLowerCase()>-<+pipeline.variables.tier.toLowerCase()>
+
+image:
+  repository: artifactory.ual.com/v-docker/harness/delegate
