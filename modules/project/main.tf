@@ -1,12 +1,12 @@
 locals {
-  config_path            = "../../config"
+  config_path            = "${path.module}/../../config"
   global_config          = yamldecode(file("${local.config_path}/values.yaml"))
   technology_area_config = yamldecode(file("${local.config_path}/${var.technology_area}/values.yaml"))
   app_ci_config          = yamldecode(file("${local.config_path}/${var.technology_area}/${var.app_ci}.yaml"))
 }
 
 data "harness_platform_organization" "this" {
-  name = var.organization_id
+  identifier = var.organization_id
 }
 
 // This is a hack to get around the soft-delete problem with Harness.
