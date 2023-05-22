@@ -22,8 +22,8 @@ resource "random_string" "this" {
 }
 
 module "kubernetes" {
-  source          = "./service-kubernetes"
   for_each        = local.service_config
+  source          = "./service-kubernetes"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
