@@ -1,3 +1,4 @@
+/*
 locals {
   config_path            = "${path.module}/../../../config"
   global_config          = yamldecode(file("${var.config_path}/values.yaml"))
@@ -8,6 +9,7 @@ locals {
     "secret" : "ENCRYPTED_TEXT",
   }
 }
+*/
 
 data "harness_platform_organization" "this" {
   identifier = var.organization_id
