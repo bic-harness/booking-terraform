@@ -23,6 +23,7 @@ resource "random_string" "this" {
 module "kubernetes" {
   source          = "./service-kubernetes"
   for_each        = local.service_config
+  team_name       = var.team_name
   name            = each.key
   repo_name       = each.value.repoName
   branch          = each.value.branch
