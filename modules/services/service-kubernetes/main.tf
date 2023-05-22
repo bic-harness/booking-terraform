@@ -30,6 +30,8 @@ resource "random_string" "this" {
 resource "harness_platform_service" "this" {
   org_id       = data.harness_platform_organization.this.id
   project_id   = data.harness_platform_project.this.id
+  name         = var.name
+  identifier   = "${var.name}_${random_string.this.result}"
 
   yaml         = <<-EOT
                   service:
@@ -40,7 +42,7 @@ resource "harness_platform_service" "this" {
                     spec:
                       manifests:
                         - manifest:
-                            identifier: "${var.name}_${random_string.this.result}"
+                            identifier: ${var.name}_${random_string.this.result}
                             type: K8sManifest
                             spec:
                               store:
