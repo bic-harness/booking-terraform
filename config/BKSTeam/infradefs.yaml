@@ -1,0 +1,7 @@
+---
+infrastructure:
+  us-east-2-aap-atw-devdrtgw:
+    type: kubernetes
+    environment: dev
+    provider: us-east-2-aap-atw-devdrtgw
+    namespace: ${serviceVariable.namespace}

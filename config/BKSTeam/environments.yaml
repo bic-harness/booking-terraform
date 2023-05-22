@@ -1,0 +1,5 @@
+---
+DQS:
+  type: nonprod
+Prod:
+  type: prod
