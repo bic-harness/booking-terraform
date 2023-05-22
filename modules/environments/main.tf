@@ -20,7 +20,7 @@ resource "random_string" "this" {
 }
 
 module "environment" {
-  for_each        = local.service_config
+  for_each        = local.envs_config
   source          = "./environment"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
