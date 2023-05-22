@@ -5,13 +5,11 @@ services:
     repoName: docker-hello-world
     branch: master
     image: bicharness/helloworld
-
   "frontend":
     type: kubernetes
     repoName: docker-hello-world
     branch: master
     image: library/nginx
-
   "helloWorld":
     type: kubernetes
     repoName: docker-hello-world
