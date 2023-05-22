@@ -1,6 +1,0 @@
-services: {}
-
-
-environments:
-  dev:
-    type: nonprod
