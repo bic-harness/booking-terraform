@@ -34,45 +34,45 @@ resource "harness_platform_service" "this" {
   identifier   = "${var.name}_${random_string.this.result}"
 
   yaml         = <<-EOT
-                  service:
-                  name: ${var.name}
-                  identifier: K8s_Service
-                  tags: {}
-                  serviceDefinition:
-                    spec:
-                      manifests:
-                        - manifest:
-                            identifier: ${var.name}_${random_string.this.result}
-                            type: K8sManifest
-                            spec:
-                              store:
-                                type: Github
-                                spec:
-                                  connectorRef: account.BCGitAccount
-                                  gitFetchType: Branch
-                                  paths:
-                                    - harness-manifests
-                                  repoName: ${var.repo_name}
-                                  branch: ${var.branch}
-                              valuesPaths:
-                                - harness-manifests/values.yaml
-                              skipResourceVersioning: true
-                              enableDeclarativeRollback: false
-                      artifacts:
-                        primary:
-                          primaryArtifactRef: <+input>
-                          sources:
-                            - spec:
-                                connectorRef: account.harnessImage
-                                imagePath: ${var.image}
-                                tag: <+input>
-                              identifier: ${var.name}_docker_${random_string.this.result}
-                              type: DockerRegistry
-                      variables:
-                        - name: myRepoPath
-                          type: String
-                          description: "Full Repository Path"
-                          value: https://github.com/bic-harness/${var.repo_name}
-                    type: Kubernetes
-                EOT
+service:
+name: ${var.name}
+identifier: K8s_Service
+tags: {}
+serviceDefinition:
+  spec:
+    manifests:
+      - manifest:
+          identifier: ${var.name}_${random_string.this.result}"
+          type: K8sManifest
+          spec:
+            store:
+              type: Github
+              spec:
+                connectorRef: account.BCGitAccount
+                gitFetchType: Branch
+                paths:
+                  - harness-manifests
+                repoName: ${var.repo_name}
+                branch: ${var.branch}
+            valuesPaths:
+              - harness-manifests/values.yaml
+            skipResourceVersioning: true
+            enableDeclarativeRollback: false
+    artifacts:
+      primary:
+        primaryArtifactRef: <+input>
+        sources:
+          - spec:
+              connectorRef: account.harnessImage
+              imagePath: ${var.image}
+              tag: <+input>
+            identifier: ${var.name}_docker_${random_string.this.result}
+            type: DockerRegistry
+    variables:
+      - name: myRepoPath
+        type: String
+        description: "Full Repository Path"
+        value: https://github.com/bic-harness/${var.repo_name}
+  type: Kubernetes
+EOT
 }
