@@ -1,3 +1,3 @@
-variable "technology_area" {
-  description = "The UAL Technology Area."
+variable "team_name" {
+  description = "The Team Name."
 }

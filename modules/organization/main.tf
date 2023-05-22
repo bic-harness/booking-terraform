@@ -7,6 +7,6 @@ resource "random_string" "this" {
 }
 
 resource "harness_platform_organization" "this" {
-  identifier = "${var.technology_area}_${random_string.this.result}"
-  name = var.technology_area
+  identifier = "${var.team_name}_${random_string.this.result}"
+  name = var.team_name
 }

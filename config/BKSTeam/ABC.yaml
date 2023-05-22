@@ -12,6 +12,10 @@ services:
         image: library/nginx
     manifest:
       branch: foo
+    variables:
+      - name: var1
+        type: String
+        value: val1
 
 
   frontend:
