@@ -3,5 +3,6 @@ variable "team_name" {
 }
 
 variable "organization_id" {
+  default = "BKSTeam_jemz"
   description = "The Harness Organization ID."
 }
