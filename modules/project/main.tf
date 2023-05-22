@@ -1,5 +1,5 @@
 locals {
-  config_path            = "${path.module}/../../config"
+  config_path            = "../../config"
   global_config          = yamldecode(file("${local.config_path}/values.yaml"))
   technology_area_config = yamldecode(file("${local.config_path}/${var.technology_area}/values.yaml"))
   app_ci_config          = yamldecode(file("${local.config_path}/${var.technology_area}/${var.app_ci}.yaml"))
@@ -18,7 +18,7 @@ resource "random_string" "this" {
 }
 
 resource "harness_platform_project" "this" {
-  identifier = "ci_${var.technology_area}_${var.app_ci}_${random_string.this.result}"
+  identifier = "${var.technology_area}_${var.app_ci}_${random_string.this.result}"
   name       = "${var.technology_area}-${var.app_ci}"
   org_id     = data.harness_platform_organization.this.id
 }
