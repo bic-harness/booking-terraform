@@ -27,7 +27,7 @@ resource "random_string" "this" {
   number = false
 }
 
-resource "harness_service_kubernetes" "this" {
+resource "harness_platform_service" "this" {
   org_id       = data.harness_platform_organization.this.id
   project_id   = data.harness_platform_project.this.id
 
