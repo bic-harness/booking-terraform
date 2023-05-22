@@ -1,8 +1,8 @@
 locals {
   config_path            = "${path.module}/../../config"
-  global_config          = yamldecode(file("${var.config_path}/values.yaml"))
-  team_config            = yamldecode(file("${var.config_path}/${var.team_name}/values.yaml"))
-  service_config         = yamldecode(file("${var.config_path}/${var.team_name}/services.yaml"))
+  global_config          = yamldecode(file("${local.config_path}/values.yaml"))
+  team_config            = yamldecode(file("${local.config_path}/${var.team_name}/values.yaml"))
+  service_config         = yamldecode(file("${local.config_path}/${var.team_name}/services.yaml"))
 }
 
 data "harness_platform_organization" "this" {
