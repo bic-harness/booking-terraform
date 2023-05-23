@@ -28,7 +28,7 @@ resource "random_string" "this" {
 }
 
 resource "harness_platform_connector_kubernetes" "this" {
-  identifier  = "${var.name}_${random_string.this.result}"
+  identifier  = var.name
   name        = var.name
 
   inherit_from_delegate {
