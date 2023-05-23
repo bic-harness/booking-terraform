@@ -1,4 +1,4 @@
-ldata "harness_platform_organization" "this" {
+data "harness_platform_organization" "this" {
   identifier = var.organization_id
 }
 
