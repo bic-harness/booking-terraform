@@ -25,6 +25,8 @@ resource "harness_platform_template" "this" {
   org_id        = data.harness_platform_organization.this.id
   project_id    = data.harness_platform_project.this.id
   name          = var.name
+  version       = "v1"
+  is_stable     = true
   template_yaml = <<-EOT
 template:
   name: ${var.name}
