@@ -13,7 +13,7 @@ data "harness_platform_project" "this" {
 }
 
 module "canary_kubernetes" {
-  for_each        = local.templates_config
+  for_each        = local.pipelines_config
   source          = "./canary-kubernetes"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
