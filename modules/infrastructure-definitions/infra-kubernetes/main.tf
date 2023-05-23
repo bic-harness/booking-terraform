@@ -31,11 +31,11 @@ infrastructureDefinition:
   tags: {}
   orgIdentifier: ${data.harness_platform_organization.this.id}
   projectIdentifier: ${data.harness_platform_project.this.id}
-  environmentRef: account.${var.env}
+  environmentRef: ${var.env}
   deploymentType: ${var.type}
   type: ${var.type == "Kubernetes" ? "KubernetesDirect" : var.type}
   spec:
-    connectorRef: ${var.connector}
+    connectorRef: account.${var.connector}
     namespace: ${var.namespace}
     releaseName: release-<+INFRA_KEY>
   allowSimultaneousDeployments: false
