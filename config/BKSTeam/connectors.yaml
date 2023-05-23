@@ -1,11 +1,5 @@
 ---
-connector:
-  name: K8s Local Cluster
-  identifier: K8s_Local_Cluster
-  description: ""
-  type: K8sCluster
-  spec:
-    credential:
-      type: InheritFromDelegate
-    delegateSelectors:
-      - k8s-ng-delegate
+dqsCluster:
+  selector: BKSTeam-harness-delegate
+prodCluster:
+  selector: BKSTeam-harness-delegate
