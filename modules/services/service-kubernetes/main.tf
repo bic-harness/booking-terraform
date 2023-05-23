@@ -24,7 +24,7 @@ resource "random_string" "this" {
   length = 4
   special = false
   upper = false
-  numeric = false
+  number = false
 }
 
 resource "harness_platform_service" "this" {
