@@ -31,7 +31,7 @@ infrastructureDefinition:
   tags: {}
   orgIdentifier: ${data.harness_platform_organization.this.id}
   projectIdentifier: ${data.harness_platform_project.this.id}
-  environmentRef: ${var.env}
+  environmentRef: account.${var.env}
   deploymentType: ${var.type}
   type: ${var.type == "Kubernetes" ? "KubernetesDirect" : var.type}
   spec:
