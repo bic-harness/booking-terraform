@@ -20,13 +20,6 @@ data "harness_platform_project" "this" {
   org_id = data.harness_platform_organization.this.id
 }
 
-resource "random_string" "this" {
-  length = 4
-  special = false
-  upper = false
-  number = false
-}
-
 resource "harness_platform_connector_kubernetes" "this" {
   identifier  = var.name
   name        = var.name

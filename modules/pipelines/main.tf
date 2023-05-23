@@ -1,6 +1,6 @@
 locals {
   config_path            = "${path.module}/../../config"
-  templates_config       = yamldecode(file("${local.config_path}/${var.team_name}/templates.yaml"))
+  pipelines_config       = yamldecode(file("${local.config_path}/${var.team_name}/pipelines.yaml"))
 }
 
 data "harness_platform_organization" "this" {

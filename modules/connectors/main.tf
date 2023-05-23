@@ -12,13 +12,6 @@ data "harness_platform_project" "this" {
   org_id = data.harness_platform_organization.this.id
 }
 
-resource "random_string" "this" {
-  length = 4
-  special = false
-  upper = false
-  number = false
-}
-
 module "connector_kubernetes" {
   for_each        = local.connector_config
   source          = "./connector-kubernetes"
