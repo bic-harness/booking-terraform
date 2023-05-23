@@ -1,7 +1,11 @@
 ---
-infrastructure:
-  us-east-2-aap-atw-devdrtgw:
-    type: kubernetes
-    environment: dev
-    provider: us-east-2-aap-atw-devdrtgw
-    namespace: ${serviceVariable.namespace}
+DQS-Cluster:
+    type: Kubernetes
+    environment: DQS
+    connector: dqsCluster
+    namespace: dev
+Prod-Cluster:
+    type: Kubernetes
+    environment: Prod
+    connector: prodCluster
+    namespace: prod

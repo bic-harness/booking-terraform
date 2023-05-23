@@ -2,7 +2,7 @@ terraform {
   required_providers {
     harness = {
       source  = "harness/harness"
-      version = "~> 0.2.7"
+      version = "0.20.0"
     }
     utils = {
       source  = "cloudposse/utils"
