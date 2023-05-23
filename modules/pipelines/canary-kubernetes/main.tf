@@ -23,7 +23,7 @@ resource "harness_platform_pipeline" "this" {
   yaml          = <<-EOT
 pipeline:
   name: ${var.name}
-  identifier: ${var.name}
+  identifier: "${var.name}_${random_string.this.result}"
   projectIdentifier: ${data.harness_platform_project.this.id}
   orgIdentifier: ${data.harness_platform_organization.this.id}
   tags: {}
