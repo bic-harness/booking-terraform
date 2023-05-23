@@ -25,7 +25,4 @@ module "connector_kubernetes" {
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
-  repo_name       = each.value.repoName
-  branch          = each.value.branch
-  image           = each.value.image
 }
