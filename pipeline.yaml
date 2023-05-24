@@ -1,0 +1,541 @@
+pipeline:
+  name: Terraform Automation Example
+  identifier: Terraform_Automation_Example
+  projectIdentifier: YOUR_PROJECT_NAME_HERE
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Organization Provisioning
+        identifier: Organization_Provisioning
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan
+                  identifier: TerraformPlan
+                  spec:
+                    provisionerIdentifier: tforg
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: YOUR_CONNECTOR_NAME_HERE
+                            repoName: booking-terraform
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: modules/organization
+                          type: Github
+                      backendConfig:
+                        type: Inline
+                        spec:
+                          content: |-
+                            bucket="bucket_name"
+                            secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                            access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                            region="eu-west-2"
+                            key = "tf-booking-automation-org.tfstate"
+                      environmentVariables:
+                        - name: HARNESS_PLATFORM_API_KEY
+                          value: <+secrets.getValue("account.TFNGToken")>
+                          type: String
+                        - name: HARNESS_ACCOUNT_ID
+                          value: <+secrets.getValue("account.HarnessAccount")>
+                          type: String
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: team_name="<+pipeline.variables.team_name>"
+                            identifier: inputs
+                            type: Inline
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply
+                  identifier: TerraformApply
+                  spec:
+                    provisionerIdentifier: tforg
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+              - step:
+                  type: ShellScript
+                  name: ExportVariables
+                  identifier: ExportVariables
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: export tfOrg="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.TerraformApply.output.organization_id>"
+                    environmentVariables: []
+                    outputVariables:
+                      - name: tfOrg
+                        type: String
+                        value: tfOrg
+                  timeout: 10m
+        tags: {}
+    - stage:
+        name: Project Provisioning
+        identifier: Project_Provisioning
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan
+                  identifier: TerraformPlan
+                  spec:
+                    provisionerIdentifier: tfproject
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: YOUR_CONNECTOR_NAME_HERE
+                            repoName: booking-terraform
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: modules/project
+                          type: Github
+                      backendConfig:
+                        type: Inline
+                        spec:
+                          content: |-
+                            bucket="bucket_name"
+                            secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                            access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                            region="eu-west-2"
+                            key = "tf-booking-automation-proj.tfstate"
+                      environmentVariables:
+                        - name: HARNESS_PLATFORM_API_KEY
+                          value: <+secrets.getValue("account.TFNGToken")>
+                          type: String
+                        - name: HARNESS_ACCOUNT_ID
+                          value: <+secrets.getValue("account.HarnessAccount")>
+                          type: String
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: |-
+                                team_name="<+pipeline.variables.team_name>"
+                                organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                            identifier: inputs
+                            type: Inline
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply
+                  identifier: TerraformApply
+                  spec:
+                    provisionerIdentifier: tfproject
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+              - step:
+                  type: ShellScript
+                  name: ExportVariables
+                  identifier: ExportVariables
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: export tfProj="<+pipeline.stages.Project_Provisioning.spec.execution.steps.TerraformApply.output.project_id>"
+                    environmentVariables: []
+                    outputVariables:
+                      - name: tfProj
+                        type: String
+                        value: tfProj
+                  timeout: 10m
+        tags: {}
+    - parallel:
+        - stage:
+            name: Services Provisioning
+            identifier: Services_Provisioning
+            description: ""
+            type: Custom
+            spec:
+              execution:
+                steps:
+                  - step:
+                      type: TerraformPlan
+                      name: TerraformPlan
+                      identifier: TerraformPlan_1
+                      spec:
+                        provisionerIdentifier: tfServices
+                        configuration:
+                          command: Apply
+                          configFiles:
+                            store:
+                              spec:
+                                connectorRef: YOUR_CONNECTOR_NAME_HERE
+                                repoName: booking-terraform
+                                gitFetchType: Branch
+                                branch: main
+                                folderPath: modules/services
+                              type: Github
+                          backendConfig:
+                            type: Inline
+                            spec:
+                              content: |-
+                                bucket="bucket_name"
+                                secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                                access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                                region="eu-west-2"
+                                key = "tf-booking-automation-svcs.tfstate"
+                          environmentVariables:
+                            - name: HARNESS_PLATFORM_API_KEY
+                              value: <+secrets.getValue("account.TFNGToken")>
+                              type: String
+                            - name: HARNESS_ACCOUNT_ID
+                              value: <+secrets.getValue("account.HarnessAccount")>
+                              type: String
+                          varFiles:
+                            - varFile:
+                                spec:
+                                  content: |-
+                                    team_name="<+pipeline.variables.team_name>"
+                                    organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                                identifier: inputs
+                                type: Inline
+                          secretManagerRef: harnessSecretManager
+                          skipRefreshCommand: false
+                      timeout: 10m
+                  - step:
+                      type: TerraformApply
+                      name: TerraformApply
+                      identifier: TerraformApply
+                      spec:
+                        provisionerIdentifier: tfServices
+                        configuration:
+                          type: InheritFromPlan
+                      timeout: 10m
+            tags: {}
+        - stage:
+            name: Environments Provisioning
+            identifier: Environments_Provisioning
+            description: ""
+            type: Custom
+            spec:
+              execution:
+                steps:
+                  - step:
+                      type: TerraformPlan
+                      name: TerraformPlan
+                      identifier: TerraformPlan
+                      spec:
+                        provisionerIdentifier: tfenvironments
+                        configuration:
+                          command: Apply
+                          configFiles:
+                            store:
+                              spec:
+                                connectorRef: YOUR_CONNECTOR_NAME_HERE
+                                repoName: booking-terraform
+                                gitFetchType: Branch
+                                branch: main
+                                folderPath: modules/environments
+                              type: Github
+                          backendConfig:
+                            type: Inline
+                            spec:
+                              content: |-
+                                bucket="bucket_name"
+                                secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                                access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                                region="eu-west-2"
+                                key = "tf-booking-automation-envs.tfstate"
+                          environmentVariables:
+                            - name: HARNESS_PLATFORM_API_KEY
+                              value: <+secrets.getValue("account.TFNGToken")>
+                              type: String
+                            - name: HARNESS_ACCOUNT_ID
+                              value: <+secrets.getValue("account.HarnessAccount")>
+                              type: String
+                          varFiles:
+                            - varFile:
+                                spec:
+                                  content: |-
+                                    team_name="<+pipeline.variables.team_name>"
+                                    organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                                identifier: inputs
+                                type: Inline
+                          secretManagerRef: harnessSecretManager
+                          skipRefreshCommand: false
+                      timeout: 10m
+                  - step:
+                      type: TerraformApply
+                      name: TerraformApply
+                      identifier: TerraformApply
+                      spec:
+                        provisionerIdentifier: tfenvironments
+                        configuration:
+                          type: InheritFromPlan
+                      timeout: 10m
+            tags: {}
+        - stage:
+            name: Connectors Provisioning
+            identifier: Connectors_Provisioning
+            description: ""
+            type: Custom
+            spec:
+              execution:
+                steps:
+                  - step:
+                      type: TerraformPlan
+                      name: TerraformPlan
+                      identifier: TerraformPlan
+                      spec:
+                        provisionerIdentifier: tfconnectors
+                        configuration:
+                          command: Apply
+                          configFiles:
+                            store:
+                              spec:
+                                connectorRef: YOUR_CONNECTOR_NAME_HERE
+                                repoName: booking-terraform
+                                gitFetchType: Branch
+                                branch: main
+                                folderPath: modules/connectors
+                              type: Github
+                          backendConfig:
+                            type: Inline
+                            spec:
+                              content: |-
+                                bucket="bucket_name"
+                                secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                                access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                                region="eu-west-2"
+                                key = "tf-booking-automation-conns.tfstate"
+                          environmentVariables:
+                            - name: HARNESS_PLATFORM_API_KEY
+                              value: <+secrets.getValue("account.TFNGToken")>
+                              type: String
+                            - name: HARNESS_ACCOUNT_ID
+                              value: <+secrets.getValue("account.HarnessAccount")>
+                              type: String
+                          varFiles:
+                            - varFile:
+                                spec:
+                                  content: |-
+                                    team_name="<+pipeline.variables.team_name>"
+                                    organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                                identifier: inputs
+                                type: Inline
+                          secretManagerRef: harnessSecretManager
+                          skipRefreshCommand: false
+                      timeout: 10m
+                  - step:
+                      type: TerraformApply
+                      name: TerraformApply
+                      identifier: TerraformApply
+                      spec:
+                        provisionerIdentifier: tfconnectors
+                        configuration:
+                          type: InheritFromPlan
+                      timeout: 10m
+            tags: {}
+    - stage:
+        name: Infrastructure Definitions Provisioning
+        identifier: Infrastructure_Definitions_Provisioning
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan
+                  identifier: TerraformPlan
+                  spec:
+                    provisionerIdentifier: tfinfradefs
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: YOUR_CONNECTOR_NAME_HERE
+                            repoName: booking-terraform
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: modules/infrastructure-definitions
+                          type: Github
+                      backendConfig:
+                        type: Inline
+                        spec:
+                          content: |-
+                            bucket="bucket_name"
+                            secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                            access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                            region="eu-west-2"
+                            key = "tf-booking-automation-infradefs.tfstate"
+                      environmentVariables:
+                        - name: HARNESS_PLATFORM_API_KEY
+                          value: <+secrets.getValue("account.TFNGToken")>
+                          type: String
+                        - name: HARNESS_ACCOUNT_ID
+                          value: <+secrets.getValue("account.HarnessAccount")>
+                          type: String
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: |-
+                                team_name="<+pipeline.variables.team_name>"
+                                organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                            identifier: inputs
+                            type: Inline
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply
+                  identifier: TerraformApply
+                  spec:
+                    provisionerIdentifier: tfinfradefs
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
+    - stage:
+        name: Templates Provisioning
+        identifier: Templates_Provisioning
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan
+                  identifier: TerraformPlan
+                  spec:
+                    provisionerIdentifier: tftemplates
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: YOUR_CONNECTOR_NAME_HERE
+                            repoName: booking-terraform
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: modules/templates
+                          type: Github
+                      backendConfig:
+                        type: Inline
+                        spec:
+                          content: |-
+                            bucket="bucket_name"
+                            secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                            access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                            region="eu-west-2"
+                            key = "tf-booking-automation-templates.tfstate"
+                      environmentVariables:
+                        - name: HARNESS_PLATFORM_API_KEY
+                          value: <+secrets.getValue("account.TFNGToken")>
+                          type: String
+                        - name: HARNESS_ACCOUNT_ID
+                          value: <+secrets.getValue("account.HarnessAccount")>
+                          type: String
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: |-
+                                team_name="<+pipeline.variables.team_name>"
+                                organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                            identifier: inputs
+                            type: Inline
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply
+                  identifier: TerraformApply
+                  spec:
+                    provisionerIdentifier: tftemplates
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
+    - stage:
+        name: Pipelines Provisioning
+        identifier: Pipelines_Provisioning
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan
+                  identifier: TerraformPlan
+                  spec:
+                    provisionerIdentifier: tfpipelines
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: YOUR_CONNECTOR_NAME_HERE
+                            repoName: booking-terraform
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: modules/pipelines
+                          type: Github
+                      backendConfig:
+                        type: Inline
+                        spec:
+                          content: |-
+                            bucket="bucket_name"
+                            secret_key="<+secrets.getValue("account.nextGenSecretKey")>"
+                            access_key="<+secrets.getValue("account.nextGenAWSAccessKey")>"
+                            region="eu-west-2"
+                            key = "tf-booking-automation-pipelines.tfstate"
+                      environmentVariables:
+                        - name: HARNESS_PLATFORM_API_KEY
+                          value: <+secrets.getValue("account.TFNGToken")>
+                          type: String
+                        - name: HARNESS_ACCOUNT_ID
+                          value: <+secrets.getValue("account.HarnessAccount")>
+                          type: String
+                      varFiles:
+                        - varFile:
+                            spec:
+                              content: |-
+                                team_name="<+pipeline.variables.team_name>"
+                                organization_id="<+pipeline.stages.Organization_Provisioning.spec.execution.steps.ExportVariables.output.outputVariables.tfOrg>"
+                            identifier: inputs
+                            type: Inline
+                      secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply
+                  identifier: TerraformApply
+                  spec:
+                    provisionerIdentifier: tfpipelines
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
+  variables:
+    - name: team_name
+      type: String
+      description: ""
+      value: <+input>
