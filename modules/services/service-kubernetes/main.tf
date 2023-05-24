@@ -20,6 +20,7 @@ data "harness_platform_project" "this" {
   org_id = data.harness_platform_organization.this.id
 }
 
+#output random_string value to be able to query all available connectors for the project
 resource "random_string" "this" {
   length = 4
   special = false
