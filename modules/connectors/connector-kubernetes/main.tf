@@ -21,7 +21,7 @@ data "harness_platform_project" "this" {
 }
 
 resource "harness_platform_connector_kubernetes" "this" {
-  identifier  = var.name
+  identifier  = var.identifier
   name        = var.name
 
   inherit_from_delegate {

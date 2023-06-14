@@ -21,12 +21,12 @@ resource "random_string" "this" {
 
 module "kubernetes" {
   for_each        = local.infradefs_config
-  source = "./infra-kubernetes"
+  source          = "./infra-kubernetes"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
   env             = each.value.environment
   type            = each.value.type
-  connector       = each.value.connector
+  connector       = "${each.value.connector}_${var.connector_random_string}"
   namespace       = each.value.namespace
 }

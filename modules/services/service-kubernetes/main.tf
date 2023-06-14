@@ -20,19 +20,11 @@ data "harness_platform_project" "this" {
   org_id = data.harness_platform_organization.this.id
 }
 
-#output random_string value to be able to query all available connectors for the project
-resource "random_string" "this" {
-  length = 4
-  special = false
-  upper = false
-  number = false
-}
-
 resource "harness_platform_service" "this" {
   org_id       = data.harness_platform_organization.this.id
   project_id   = data.harness_platform_project.this.id
   name         = var.name
-  identifier   = "${var.name}_${random_string.this.result}"
+  identifier   = var.identifier
 
   yaml         = <<-EOT
 service:

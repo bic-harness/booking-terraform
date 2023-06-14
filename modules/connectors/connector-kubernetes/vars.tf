@@ -7,5 +7,9 @@ variable "organization_id" {
 }
 
 variable "name" {
-  description = "The name of the service."
+  description = "The name of the resource."
+}
+
+variable "identifier" {
+  description = "The identifier of the resource."
 }

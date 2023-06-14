@@ -5,3 +5,5 @@ variable "team_name" {
 variable "organization_id" {
   description = "The Harness Organization ID."
 }
+
+variable "connector_random_string" {}
