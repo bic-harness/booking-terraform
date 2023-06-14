@@ -13,3 +13,7 @@ variable "name" {
 variable "type" {
   description = "Type of environment."
 }
+
+variable "level" {
+  description = "The level of the environment."
+}

@@ -22,7 +22,7 @@ data "harness_platform_project" "this" {
 
 resource "harness_platform_environment" "this" {
   org_id       = data.harness_platform_organization.this.id
-  project_id   = data.harness_platform_project.this.id
+  project_id   = var.level == "project" ? data.harness_platform_project.this.id : null
   name         = var.name
   identifier   = var.name
   type         = var.type

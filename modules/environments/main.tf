@@ -26,4 +26,5 @@ module "environment" {
   team_name       = var.team_name
   name            = each.key
   type            = each.value.type
+  level           = each.value.level
 }
