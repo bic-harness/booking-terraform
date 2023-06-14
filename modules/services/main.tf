@@ -25,7 +25,7 @@ module "kubernetes" {
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
-  identifier      = "${each.name}_${random_string.this.result}"
+  identifier      = "${each.key}_${random_string.this.result}"
   repo_name       = each.value.repoName
   branch          = each.value.branch
   image           = each.value.image

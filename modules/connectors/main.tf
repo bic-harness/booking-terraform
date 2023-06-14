@@ -25,4 +25,5 @@ module "connector_kubernetes" {
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
+  identifier      = "${each.key}_${random_string.this.result}"
 }
