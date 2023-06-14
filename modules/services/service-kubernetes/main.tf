@@ -29,7 +29,7 @@ resource "harness_platform_service" "this" {
   yaml         = <<-EOT
 service:
   name: ${var.name}
-  identifier: ${var.name}_${random_string.this.result}
+  identifier: ${var.identifier}
   tags: {}
   serviceDefinition:
     spec:
