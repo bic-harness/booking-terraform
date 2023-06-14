@@ -35,7 +35,7 @@ service:
     spec:
       manifests:
         - manifest:
-            identifier: ${var.name}_svc_${random_string.this.result}
+            identifier: ${var.identifier}_svc
             type: K8sManifest
             spec:
               store:
@@ -59,7 +59,7 @@ service:
                 connectorRef: account.harnessImage
                 imagePath: ${var.image}
                 tag: <+input>
-              identifier: ${var.name}_docker_${random_string.this.result}
+              identifier: ${var.identifier}_docker
               type: DockerRegistry
       variables:
         - name: myRepoPath
