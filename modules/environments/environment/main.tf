@@ -21,9 +21,9 @@ data "harness_platform_project" "this" {
 }
 
 resource "harness_platform_environment" "this" {
-  org_id       = data.harness_platform_organization.this.id
+  org_id       = var.level == "org" ? data.harness_platform_organization.this.id : null
   project_id   = var.level == "project" ? data.harness_platform_project.this.id : null
   name         = var.name
-  identifier   = var.name
+  identifier   = var.identifier
   type         = var.type
 }

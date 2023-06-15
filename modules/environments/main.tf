@@ -24,6 +24,7 @@ module "environment" {
   source          = "./environment"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
+  identifier      = "${each.key}_${random_string.this.result}"
   name            = each.key
   type            = each.value.type
   level           = each.value.level

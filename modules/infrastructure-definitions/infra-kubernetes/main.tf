@@ -11,7 +11,7 @@ resource "harness_platform_infrastructure" "this" {
   org_id          = data.harness_platform_organization.this.id
   project_id      = data.harness_platform_project.this.id
   name            = var.name
-  identifier      = var.name
+  identifier      = var.identifier
   env_id          = var.env
   type            = var.type == "Kubernetes" ? "KubernetesDirect" : var.type
   deployment_type = var.type
@@ -19,7 +19,7 @@ resource "harness_platform_infrastructure" "this" {
   yaml            =  <<-EOT
 infrastructureDefinition:
   name: ${var.name}
-  identifier: ${var.name}
+  identifier: ${var.identifier}
   description: ""
   tags: {}
   orgIdentifier: ${data.harness_platform_organization.this.id}

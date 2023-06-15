@@ -10,6 +10,10 @@ variable "name" {
   description = "The name of the infrastructure definition."
 }
 
+variable "identifier" {
+  description = "The identifier of the infrastructure definition."
+}
+
 variable "env" {
   description = "The environment for the infrastructure definition."
 }

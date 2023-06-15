@@ -7,3 +7,5 @@ variable "organization_id" {
 }
 
 variable "connector_random_string" {}
+
+variable "environment_random_string" {}

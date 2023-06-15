@@ -6,6 +6,10 @@ variable "organization_id" {
   description = "The Harness Organization ID."
 }
 
+variable "identifier" {
+  description = "The identifier of the environment."
+}
+
 variable "name" {
   description = "The name of the environment."
 }
