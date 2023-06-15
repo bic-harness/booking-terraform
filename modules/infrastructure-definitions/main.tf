@@ -26,7 +26,7 @@ module "kubernetes" {
   team_name       = var.team_name
   name            = each.key
   identifier      = "${each.key}_${random_string.this.result}"
-  env             = "${each.value.environment}__${var.environment_random_string}"
+  env             = "${each.value.environment}_${var.environment_random_string}"
   type            = each.value.type
   connector       = "${each.value.connector}_${var.connector_random_string}"
   namespace       = each.value.namespace
