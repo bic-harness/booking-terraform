@@ -30,7 +30,7 @@ module "connector_kubernetes" {
 }
 
 
-module "connector_kubernetes" {
+module "connector_aws" {
   for_each        = local.aws_connector_config
   source          = "./connector-aws"
   organization_id = data.harness_platform_organization.this.id
