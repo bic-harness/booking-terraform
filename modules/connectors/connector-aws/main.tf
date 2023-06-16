@@ -12,7 +12,7 @@ resource "harness_platform_connector_aws" "this" {
   name        = var.name
 
   manual {
-    access_key_ref = account.nextGenAWSAccessKey
-    secret_key_ref = account.nextGenSecretKey
+    access_key_ref = "account.nextGenAWSAccessKey"
+    secret_key_ref = "account.nextGenSecretKey"
   }
 }
