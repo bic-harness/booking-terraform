@@ -1,6 +1,6 @@
 locals {
   config_path            = "${path.module}/../../config"
-  pipelines_config       = yamldecode(file("${local.config_path}/${var.team_name}/pipelines.yaml"))
+  k8s_pipelines_config       = yamldecode(file("${local.config_path}/${var.team_name}/K8s/pipelines.yaml"))
 }
 
 data "harness_platform_organization" "this" {
@@ -13,7 +13,7 @@ data "harness_platform_project" "this" {
 }
 
 module "canary_kubernetes" {
-  for_each        = local.pipelines_config
+  for_each        = local.k8s_pipelines_config
   source          = "./canary-kubernetes"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name

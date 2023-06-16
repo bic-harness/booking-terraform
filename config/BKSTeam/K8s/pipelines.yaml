@@ -1,0 +1,3 @@
+---
+CanaryDeploymentPipeline:
+  type: canary

@@ -1,0 +1,11 @@
+---
+DQSCluster:
+    type: Kubernetes
+    environment: DQS
+    connector: dqsCluster
+    namespace: dev
+ProdCluster:
+    type: Kubernetes
+    environment: Prod
+    connector: prodCluster
+    namespace: prod

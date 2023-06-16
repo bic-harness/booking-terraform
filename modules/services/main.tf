@@ -1,6 +1,6 @@
 locals {
   config_path            = "${path.module}/../../config"
-  service_config         = yamldecode(file("${local.config_path}/${var.team_name}/services.yaml"))
+  k8s_service_config     = yamldecode(file("${local.config_path}/${var.team_name}/K8s/services.yaml"))
 }
 
 data "harness_platform_organization" "this" {
@@ -20,7 +20,7 @@ resource "random_string" "this" {
 }
 
 module "kubernetes" {
-  for_each        = local.service_config
+  for_each        = local.k8s_service_config
   source          = "./service-kubernetes"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
