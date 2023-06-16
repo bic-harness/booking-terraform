@@ -1,6 +1,7 @@
 locals {
   config_path            = "${path.module}/../../config"
   k8s_connector_config   = yamldecode(file("${local.config_path}/${var.team_name}/K8s/connectors.yaml"))
+  aws_connector_config   = yamldecode(file("${local.config_path}/${var.team_name}/AWS/connectors.yaml"))
 }
 
 data "harness_platform_organization" "this" {
@@ -22,6 +23,16 @@ resource "random_string" "this" {
 module "connector_kubernetes" {
   for_each        = local.k8s_connector_config
   source          = "./connector-kubernetes"
+  organization_id = data.harness_platform_organization.this.id
+  team_name       = var.team_name
+  name            = each.key
+  identifier      = "${each.key}_${random_string.this.result}"
+}
+
+
+module "connector_kubernetes" {
+  for_each        = local.aws_connector_config
+  source          = "./connector-aws"
   organization_id = data.harness_platform_organization.this.id
   team_name       = var.team_name
   name            = each.key
