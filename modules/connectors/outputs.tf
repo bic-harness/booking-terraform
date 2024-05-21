@@ -1,3 +1,3 @@
-output "id" {
-   value = harness_platform_connector_kubernetes.this.id
+output "connector_random_string" {
+  value = random_string.this.result
 }

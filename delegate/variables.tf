@@ -5,7 +5,3 @@ variable "team_name" {
 variable "organization_id" {
   description = "The Harness Organization ID."
 }
-
-variable "identifier" {
-  description = "The Harness Connector Identifier."
-}
