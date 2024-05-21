@@ -3,4 +3,5 @@ module "k8s_connector" {
   version = "1.0.0"
   team_name = var.team_name
   organization_id = var.organization_id
+  identifier = var.identifier
 }
